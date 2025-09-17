@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useState , useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import StudentsTable from './StudentsTable';
@@ -10,6 +10,10 @@ function AgentDashboard() {
   const [activeTab, setActiveTab] = useState('dashboard');
 
   const renderContent = () => {
+     useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }, []);
+      
     switch (activeTab) {
       case 'dashboard':
         return <Dashboard />;

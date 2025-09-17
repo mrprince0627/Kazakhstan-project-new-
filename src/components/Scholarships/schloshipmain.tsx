@@ -1,4 +1,4 @@
-import  { useState, useMemo } from 'react';
+import  { useState, useMemo ,useEffect } from 'react';
 import {  Calendar, CheckSquare, Square, Download } from 'lucide-react';
 import { ScholarshipCard } from './ScholarshipCard';
 import { FilterBar } from './FilterBar';
@@ -81,7 +81,9 @@ function App() {
     // In a real app, this would navigate to a detailed page
     alert(`View details for ${scholarshipId} at ${universityId}`);
   };
-
+useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
   return (
     <div className="min-h-screen bg-gray-50">
      

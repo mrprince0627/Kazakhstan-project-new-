@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Search, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown, Calendar, Filter } from 'lucide-react';
+import ExpandableTextboxProps from "../ExpandableTextboxProps"
+
 
 interface UniversityData {
   name: string;
@@ -297,7 +299,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 -mt-10">
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">   
           {/* Header Section */}
@@ -674,7 +676,10 @@ function App() {
             })}
           </div>
         )}
+
+        
       </div>
+      <ExpandableTextboxProps/>
     </div>
   );
 }

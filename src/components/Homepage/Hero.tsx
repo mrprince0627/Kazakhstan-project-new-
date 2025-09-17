@@ -1,9 +1,11 @@
 
 import { ArrowRight, Users, GraduationCap, Globe, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+ import DownloadFormPopup from '../university/DownloadFormPopup';
+import { useState } from 'react';
 
 const Hero = () => {
+   const [isPopupOpen, setIsPopupOpen] = useState(false);
   return (
     <section id="home" className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 text-white">
       {/* Background Pattern */}
@@ -42,7 +44,9 @@ const Hero = () => {
                 </Link>
                 <ArrowRight className="w-5 h-5" />
               </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors">
+              <button   onClick={() => setIsPopupOpen(true)}
+
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors">
                 Download Brochure
               </button>
             </div>
@@ -108,6 +112,11 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      <DownloadFormPopup 
+        isOpen={isPopupOpen} 
+        onClose={() => setIsPopupOpen(false)} 
+        universityName="Kyrgyzstan Universities" 
+      />
     </section>
   );
 };

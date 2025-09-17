@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { BookOpen, Clock, Users, Award, Globe, CheckCircle, ArrowRight, GraduationCap,  } from 'lucide-react';
-
+import { useEffect } from 'react';
 const EducationSystem = () => {
   const systemFeatures = [
     {
@@ -59,12 +59,15 @@ const EducationSystem = () => {
     { grade: "D", percentage: "60-69%", gpa: "1.0-1.9", description: "Pass" },
     { grade: "F", percentage: "Below 60%", gpa: "0.0", description: "Fail" }
   ];
-
+ useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+  
   return (
-    <section id="education-system" className="py-20 bg-gray-50">
+    <section id="education-system" className="py-20 bg-gray-50 -mt-10">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4 -mt-10">
             Education System in Kyrgyzstan
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -130,7 +133,7 @@ const EducationSystem = () => {
         </div>
 
         {/* System Features */}
-        <div className="mb-20">
+        <div className="mb-10">
           <h3 className="text-3xl font-bold text-gray-800 text-center mb-12">
             Why Choose Kyrgyzstan's Education System?
           </h3>
@@ -191,7 +194,7 @@ const EducationSystem = () => {
         </div>
 
         {/* Grading System */}
-        <div className="mb-20">
+        <div className="mb-10 -mt-10">
           <h3 className="text-3xl font-bold text-gray-800 text-center mb-12">
             Grading System
           </h3>
@@ -257,26 +260,7 @@ const EducationSystem = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">
-            Ready to Join This Excellent Education System?
-          </h3>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Get detailed information about admission requirements, curriculum, and how to apply 
-            to universities in Kyrgyzstan.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center justify-center space-x-2">
-              <span>Get Admission Guide</span>
-              <ArrowRight className="w-5 h-5" />
-            </button>
-            <Link to="/contact-us"  
-             className="border-2 border-red-600 text-red-600 px-8 py-4 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-colors">
-              Schedule Counseling
-            </Link>
-          </div>
-        </div>
+        
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useState ,useEffect} from 'react';
 import {  BookOpen, Newspaper, FileText } from 'lucide-react';
 import Blog from './Blog';
 import News from './News';
@@ -36,7 +36,9 @@ function BlognewsMain() {
   const handleBackToArtical = () => {
     setSelectedArticalItem(null);
   };
-
+useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       {/* Header */}

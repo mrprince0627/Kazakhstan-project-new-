@@ -27,13 +27,29 @@ import {
   TreePine,
   Waves
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import banner from "../yuriy.jpg"
+import oha from "../oha.jpg"
+import jalal from "../Jalal-Abad.jpg"
+import Bishkek from "../bishkek.jpg"
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-red-600 via-orange-600 to-red-900 text-white py-20">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <section
+        className="relative text-white py-20"
+        style={{
+          backgroundImage: `url(${banner})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 bg-red-600 opacity-80"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -421,7 +437,10 @@ function App() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-gradient-to-br from-blue-600 to-purple-700 text-white p-8 rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <h3 className="text-2xl font-bold mb-3">Bishkek</h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold mb-3">Bishkek</h3>
+                <img src={Bishkek} alt="Bishkek" className="w-12 h-12 rounded-full" />
+              </div>
               <p className="text-blue-100 mb-4">Capital city, political and economic center with major universities</p>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center text-blue-200">
@@ -436,7 +455,10 @@ function App() {
             </div>
             
             <div className="bg-gradient-to-br from-green-600 to-emerald-700 text-white p-8 rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <h3 className="text-2xl font-bold mb-3">Osh</h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold mb-3 ">Osh</h3>
+                <img src={oha} alt="Osh" className="w-12 h-12 rounded-full  " />
+              </div>
               <p className="text-green-100 mb-4">Second largest city, cultural heart with ancient bazaar</p>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center text-green-200">
@@ -451,7 +473,10 @@ function App() {
             </div>
             
             <div className="bg-gradient-to-br from-orange-600 to-red-700 text-white p-8 rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <h3 className="text-2xl font-bold mb-3">Jalal-Abad</h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold mb-3">Jalal-Abad</h3>
+                <img src={jalal} alt="Jalal-Abad" className="w-12 h-12 rounded-full" />
+              </div>
               <p className="text-orange-100 mb-4">Industrial center with growing educational facilities</p>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center text-orange-200">
@@ -573,7 +598,7 @@ function App() {
       </section>
 
       {/* Quick Facts */}
-      <section className="py-16 bg-gradient-to-r from-orange-600 to-red-600 text-white">
+      <section className="py-16 bg-red-600 text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <Star className="h-16 w-16 text-indigo-200 mx-auto mb-4" />
@@ -610,19 +635,21 @@ function App() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white">
+      <section className="py-16 bg-red-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-6">
           <h2 className="text-4xl font-bold mb-6">Start Your MBBS Journey in Kyrgyzstan</h2>
           <p className="text-xl text-blue-100 mb-8">
             Discover world-class medical education in the heart of Central Asia's most beautiful country
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-white text-indigo-700 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors">
+            <Link to="/universities"
+             className="bg-white text-indigo-700 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors">
               Explore MBBS Programs
-            </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-indigo-700 transition-colors">
+            </Link>
+            <Link to="/contact-us"
+            className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-indigo-700 transition-colors">
               Contact Universities
-            </button>
+            </Link>
           </div>
         </div>
       </section>

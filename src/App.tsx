@@ -24,6 +24,8 @@ import Partners from './components/Pages/OurPartners/Partners';
 import StudentDashboard from './components/Pages/Student/Dashboard';
 import AgentDashboard from './components/Pages/Agent/AgentDashboard';
 import BlognewsMain from './components/Pages/Blog&News/BlogNewsMain';
+import ApplicationForm from './components/Pages/Student/ApplicationForm';
+
 
 
 function App(): JSX.Element {
@@ -62,8 +64,17 @@ function App(): JSX.Element {
         <Route path="/student-dashboard" element={<StudentDashboard applications={[]} student={{} as any} />} />
 
         <Route path='/agent-dashboard' element={<AgentDashboard />} />
-          <Route path="/scholarships/:universityId/:scholarshipId" element={<ScolarshipDetail />} />
-<Route path="/blog-news" element={<BlognewsMain />} />
+        <Route path="/scholarships/:universityId/:scholarshipId" element={<ScolarshipDetail />} />
+        <Route path="/blog-news" element={<BlognewsMain />} />
+        <Route
+          path="/student/application-form"
+          element={
+            <ApplicationForm onApplicationSubmit={(applicationData) => {
+              // handle application submission here
+              console.log('Application submitted:', applicationData);
+            }} />
+          }
+        />
 
       </Routes>
 

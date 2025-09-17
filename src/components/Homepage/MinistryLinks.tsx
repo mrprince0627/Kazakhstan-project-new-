@@ -76,7 +76,7 @@ const MinistryLinks = () => {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white -mt-10">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">
@@ -229,24 +229,8 @@ const MinistryLinks = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">
-            Need Assistance with Official Procedures?
-          </h3>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Our team can help you navigate official procedures and connect with the right 
-            government departments for your education needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-              Get Official Guidance
-            </button>
-            <button className="border-2 border-red-600 text-red-600 px-8 py-4 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-colors">
-              Embassy Contact Support
-            </button>
-          </div>
-        </div>
+        
+        
       </div>
     </section>
   );

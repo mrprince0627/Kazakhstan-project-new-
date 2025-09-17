@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { User, Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 interface SignUpFormData {
@@ -9,11 +9,13 @@ interface SignUpFormData {
   password: string;
   confirmPassword: string;
   agreeToTerms: boolean;
+  role: 'student' | 'agent';
 }
 
 interface LoginFormData {
   email: string;
   password: string;
+  role: 'student' | 'agent';
 }
 
 const Signup: React.FC = () => {
@@ -29,12 +31,14 @@ const Signup: React.FC = () => {
     phoneNumber: '',
     password: '',
     confirmPassword: '',
-    agreeToTerms: false
+    agreeToTerms: false,
+    role: 'student'
   });
 
   const [loginData, setLoginData] = useState<LoginFormData>({
     email: '',
-    password: ''
+    password: '',
+    role: 'student'
   });
 
   const countryCodes = [
@@ -76,7 +80,7 @@ const Signup: React.FC = () => {
     console.log('Sign up successful:', signUpData);
   };
 
-  const handleLoginSubmit = async (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormECHOENT) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -98,14 +102,20 @@ const Signup: React.FC = () => {
       phoneNumber: '',
       password: '',
       confirmPassword: '',
-      agreeToTerms: false
+      agreeToTerms: false,
+      role: 'student'
     });
     setLoginData({
       email: '',
-      password: ''
+      password: '',
+      role: 'student'
     });
   };
 
+ useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+  
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -131,6 +141,30 @@ const Signup: React.FC = () => {
                 : 'Join Study in Kyrgyzstan today and start exploring your documents in a whole new way'
               }
             </p>
+          </div>
+
+          {/* Role Selection */}
+          <div className="flex justify-center space-x-4 mb-6">
+            <button
+              onClick={() => isLogin ? handleLoginInputChange('role', 'student') : handleSignUpInputChange('role', 'student')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                (isLogin ? loginData.role : signUpData.role) === 'student'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              Student
+            </button>
+            <button
+              onClick={() => isLogin ? handleLoginInputChange('role', 'agent') : handleSignUpInputChange('role', 'agent')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                (isLogin ? loginData.role : signUpData.role) === 'agent'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              Agent
+            </button>
           </div>
 
           {/* Sign Up Form */}
@@ -287,7 +321,7 @@ const Signup: React.FC = () => {
                 className={`w-full py-4 rounded-lg font-medium transition-all duration-200 ${
                   isSubmitting
                     ? 'bg-gray-400 text-white cursor-not-allowed'
-                    : 'bg-gradient-to-r from-red-600 to-orange-600 text-white hover:from-red-600 hover:to-red-700 transform hover:scale-[1.02] shadow-lg hover:shadow-xl'
+                    : 'bg-red-600 text-white hover:from-red-600 hover:to-red-700 transform hover:scale-[1.02] shadow-lg hover:shadow-xl'
                 }`}
               >
                 {isSubmitting ? (
@@ -362,7 +396,7 @@ const Signup: React.FC = () => {
                 className={`w-full py-4 rounded-lg font-medium transition-all duration-200 ${
                   isSubmitting
                     ? 'bg-gray-400 text-white cursor-not-allowed'
-                    : 'bg-gradient-to-r from-red-600 to-orange-600 text-white hover:from-red-600 hover:to-red-700 transform hover:scale-[1.02] shadow-lg hover:shadow-xl'
+                    : 'bg-red-600 text-white hover:from-red-600 hover:to-red-700 transform hover:scale-[1.02] shadow-lg hover:shadow-xl'
                 }`}
               >
                 {isSubmitting ? (

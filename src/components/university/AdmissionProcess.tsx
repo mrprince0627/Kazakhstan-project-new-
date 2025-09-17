@@ -1,5 +1,6 @@
 
 import { FileText, UserCheck, CreditCard, Plane, GraduationCap, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const steps = [
   {
@@ -86,9 +87,10 @@ const AdmissionProcess = () => {
         </div>
         
         <div className="text-center mt-12">
-          <button className="bg-gradient-to-r from-red-600 to-red-600 text-white px-8 py-4 rounded-lg hover:from-red-700 hover:to-red-700 transition-all duration-300 font-medium text-lg shadow-lg">
+          <Link to="/student/application-form"
+           className="bg-gradient-to-r from-red-600 to-red-600 text-white px-8 py-4 rounded-lg hover:from-red-700 hover:to-red-700 transition-all duration-300 font-medium text-lg shadow-lg">
             Start Your Application Today
-          </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   User, 
   Building, 
@@ -70,6 +71,7 @@ interface FormData {
 }
 
 const PartnerApplicationForm: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -106,7 +108,6 @@ const PartnerApplicationForm: React.FC = () => {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const totalSteps = 5;
 
@@ -134,7 +135,7 @@ const PartnerApplicationForm: React.FC = () => {
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     setIsSubmitting(false);
-    setIsSubmitted(true);
+    navigate('/agent-dashboard');
   };
 
   const nextStep = () => {
@@ -167,44 +168,10 @@ const PartnerApplicationForm: React.FC = () => {
     'Document Verification', 'Scholarship Guidance', 'Career Counseling', 'Test Preparation',
     'University Selection', 'Application Processing', 'Financial Planning', 'Post-arrival Support'
   ];
-
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
-          <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-10 h-10 text-white" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Application Submitted!</h2>
-          <p className="text-gray-600 mb-6">
-            Thank you for your interest in partnering with us. We have received your application and will review it within 3-5 business days.
-          </p>
-          <p className="text-sm text-gray-500 mb-6">
-            You will receive a confirmation email shortly with your application reference number.
-          </p>
-          <button 
-            onClick={() => {
-              setIsSubmitted(false);
-              setCurrentStep(1);
-              setFormData({
-                firstName: '', lastName: '', email: '', phone: '', alternatePhone: '',
-                companyName: '', companyType: '', registrationNumber: '', establishedYear: '', website: '',
-                address: '', city: '', state: '', pincode: '', country: 'India',
-                designation: '', experience: '', qualification: '', specialization: [],
-                currentStudents: '', annualRevenue: '', teamSize: '', servicesOffered: [],
-                partnershipType: '', expectedStudents: '', marketingBudget: '', references: '',
-                whyPartner: '', additionalInfo: '', termsAccepted: false, dataConsent: false
-              });
-            }}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Submit Another Application
-          </button>
-        </div>
-      </div>
-    );
-  }
-
+useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -218,10 +185,10 @@ const PartnerApplicationForm: React.FC = () => {
 
         {/* Progress Bar */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-center sm:justify-between mb-4 flex-wrap">
             {[1, 2, 3, 4, 5].map((step) => (
               <div key={step} className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-medium ${
                   step <= currentStep 
                     ? 'bg-blue-600 text-white' 
                     : 'bg-gray-200 text-gray-600'
@@ -229,9 +196,9 @@ const PartnerApplicationForm: React.FC = () => {
                   {step}
                 </div>
                 {step < 5 && (
-                  <div className={`w-16 h-1 mx-2 ${
+                  <div className={`flex-1 h-1 mx-1 sm:mx-2 ${
                     step < currentStep ? 'bg-blue-600' : 'bg-gray-200'
-                  }`} />
+                  } w-8 sm:w-12 md:w-16`} />
                 )}
               </div>
             ))}

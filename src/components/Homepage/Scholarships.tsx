@@ -1,5 +1,6 @@
 import React from 'react';
 import { Award, Users, DollarSign, Calendar, CheckCircle, ArrowRight, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Scholarships = () => {
   const scholarships = [
@@ -67,10 +68,10 @@ const Scholarships = () => {
   };
 
   return (
-    <section id="scholarships" className="py-20 bg-white">
+    <section id="scholarships" className="py-20 bg-white -mt-20">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4 -mt-10">
             Scholarships & Financial Aid
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -240,9 +241,10 @@ const Scholarships = () => {
             and help you secure the best financial aid opportunities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-              Get Scholarship Guidance
-            </button>
+            <Link to={"/scholarships"}
+            className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+             Explore Scholarship 
+            </Link>
             <button className="border-2 border-red-600 text-red-600 px-8 py-4 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-colors">
               Download Scholarship Guide
             </button>

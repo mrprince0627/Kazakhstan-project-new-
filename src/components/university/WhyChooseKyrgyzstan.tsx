@@ -1,5 +1,8 @@
 
 import { DollarSign, Globe, Award, Clock, Heart, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
+ import DownloadFormPopup from '../university/DownloadFormPopup';
+import { useState } from 'react';
 // import BrochureGenerator from './BrochureGenerator';
 
 // Sample universities data for brochure
@@ -63,6 +66,8 @@ const benefits = [
 ];
 
 const WhyChooseKyrgyzstan = () => {
+   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   return (
     <section className="py-16 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50">
       <div className="container mx-auto px-4">
@@ -100,10 +105,14 @@ const WhyChooseKyrgyzstan = () => {
               Get personalized guidance from our expert counselors.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-red-600 to-red-600 text-white px-8 py-4 rounded-lg hover:from-red-700 hover:to-red-700 transition-all duration-300 font-medium text-lg shadow-lg">
+              <Link 
+              to="/student/application-form"
+              className="bg-gradient-to-r from-red-600 to-red-600 text-white px-8 py-4 rounded-lg hover:from-red-700 hover:to-red-700 transition-all duration-300 font-medium text-lg shadow-lg">
                 Apply Now
-              </button>
-               <button className="bg-gradient-to-r from-red-600 to-red-600 text-white px-8 py-4 rounded-lg hover:from-red-700 hover:to-red-700 transition-all duration-300 font-medium text-lg shadow-lg">
+              </Link>
+               <button onClick={() => setIsPopupOpen(true)}
+
+               className="bg-gradient-to-r from-red-600 to-red-600 text-white px-8 py-4 rounded-lg hover:from-red-700 hover:to-red-700 transition-all duration-300 font-medium text-lg shadow-lg">
                 Download Brochure
               </button>
               {/* <BrochureGenerator universities={sampleUniversities} /> */}
@@ -111,6 +120,11 @@ const WhyChooseKyrgyzstan = () => {
           </div>
         </div>
       </div>
+      <DownloadFormPopup 
+        isOpen={isPopupOpen} 
+        onClose={() => setIsPopupOpen(false)} 
+        universityName="Kyrgyzstan Universities" 
+      />
     </section>
   );
 };

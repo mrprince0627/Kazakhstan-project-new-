@@ -1,7 +1,7 @@
-import  { useState } from 'react';
+import  { useState , useEffect} from 'react';
 import { Check, X, Star, Users, MapPin, DollarSign, Calendar, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Newanup from './newanup';
+import Newanup from './Newanup';
 
 const CompareUniversities = () => {
   const [selectedUniversities, setSelectedUniversities] = useState([1, 2, 3]);
@@ -98,12 +98,15 @@ const CompareUniversities = () => {
   };
 
   const getUniversityById = (id: number) => universities.find(u => u.id === id);
-
+ useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+  
   return (
-    <section id="compare" className="py-20 bg-gray-50">
+    <section id="compare" className="py-20 bg-gray-50 -mt-10">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4 -mt-10">
             Compare Universities
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">

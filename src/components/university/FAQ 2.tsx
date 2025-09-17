@@ -93,22 +93,7 @@ const FAQ = () => {
           </div>
         </div>
         
-        <div className="text-center mt-12">
-          <div className="bg-blue-50 rounded-xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Still have questions?</h3>
-            <p className="text-gray-600 mb-4">
-              Our expert counselors are here to help you with personalized guidance
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-medium">
-                Schedule Free Consultation
-              </button>
-              <button className="border border-red-600 text-red-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors font-medium">
-                Download Brochure
-              </button>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </section>
   );

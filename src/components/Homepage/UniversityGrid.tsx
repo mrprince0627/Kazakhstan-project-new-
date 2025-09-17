@@ -92,6 +92,12 @@ const UniversityGrid = () => {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
+function slugify(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/\s+/g, "-")      // spaces → hyphens
+    .replace(/[^\w-]+/g, "");  // remove special chars
+}
 
   return (
     <section className="py-20 bg-gray-50">
@@ -175,10 +181,11 @@ const UniversityGrid = () => {
                 </div>
 
                 {/* Action Button */}
-                <button className="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 transition-colors flex items-center justify-center space-x-2 group">
-                  <span>View Details</span>
+                <Link to={`/universities/${slugify(university.name)}`} className="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 transition-colors flex items-center justify-center space-x-2 group">
+                 <span>View Details</span>
+                 
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </Link>
               </div>
             </div>
           ))}

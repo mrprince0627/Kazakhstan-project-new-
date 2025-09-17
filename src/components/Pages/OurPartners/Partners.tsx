@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo , useEffect} from 'react';
 import PartnerApplicationForm from './PartnerApplicationForm';
 import ContactTeam from './ContactTeam';
 import {
@@ -259,6 +259,9 @@ function Partners() {
             states: new Set(partners.map(p => p.state)).size
         };
     }, []);
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }, []);
 
     if (showApplicationForm) {
         return <PartnerApplicationForm />;
@@ -315,7 +318,7 @@ function Partners() {
             </section>
 
             {/* Search and Filter Section */}
-            <section className="py-12 bg-gray-50 sticky top-0 z-40 shadow-sm">
+            <section className="py-12 bg-gray-50  top-0 z-40 shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-2xl p-6 shadow-lg">
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">

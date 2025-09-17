@@ -8,7 +8,13 @@ interface DownloadFormPopupProps {
 }
 
 const DownloadFormPopup: React.FC<DownloadFormPopupProps> = ({ isOpen, onClose, universityName }) => {
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    countryCode: '',
+    mobile: '',
+    nationality: ''
+  });
   const [emailError, setEmailError] = useState('');
   const [isDownloading, setIsDownloading] = useState(false);
 
@@ -24,8 +30,13 @@ const DownloadFormPopup: React.FC<DownloadFormPopupProps> = ({ isOpen, onClose, 
     return '';
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
   const handleDownload = () => {
-    const error = validateEmail(email);
+    const error = validateEmail(formData.email);
     if (error) {
       setEmailError(error);
       return;
@@ -33,12 +44,11 @@ const DownloadFormPopup: React.FC<DownloadFormPopupProps> = ({ isOpen, onClose, 
     setEmailError('');
     setIsDownloading(true);
 
-    // Simulate download
     setTimeout(() => {
-      alert(`Downloading brochure for ${universityName} to ${email}`);
+      alert(`Downloading brochure for ${universityName} to ${formData.email}`);
       setIsDownloading(false);
       onClose();
-      setEmail(''); // Clear email after download
+      setFormData({ name: '', email: '', countryCode: '', mobile: '', nationality: '' });
     }, 1500);
   };
 
@@ -52,28 +62,85 @@ const DownloadFormPopup: React.FC<DownloadFormPopupProps> = ({ isOpen, onClose, 
           <X className="w-6 h-6" />
         </button>
         <div className="text-center mb-6">
-          <DownloadCloud className="w-12 h-12 text-blue-500 mx-auto mb-3" />
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Download Brochure</h2>
-          <p className="text-gray-600">Enter your email to download the brochure for {universityName}.</p>
+          <DownloadCloud className="w-12 h-12 text-blue-500 mx-auto mb-2" />
+          <h2 className="text-2xl font-bold text-gray-800 mb-1">Download Brochure</h2>
+          <p className="text-gray-600">Fill in the details to download the brochure for {universityName}.</p>
         </div>
 
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            className={`w-full px-4 py-2 border ${emailError ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-blue-500 focus:border-blue-500`}
-            placeholder="your.email@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={isDownloading}
-          />
-          {emailError && <p className="text-red-500 text-xs mt-1">{emailError}</p>}
+        <div className="mb-4 space-y-3">
+          <div>
+            <label htmlFor="name" className="block text-gray-700 text-sm font-medium mb-1">Name</label>
+            <input
+              type="text"
+              id="name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              disabled={isDownloading}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-1">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              className={`w-full px-4 py-2 border ${emailError ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-blue-500 focus:border-blue-500`}
+              placeholder="your.email@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              disabled={isDownloading}
+            />
+            {emailError && <p className="text-red-500 text-xs mt-1">{emailError}</p>}
+          </div>
+
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">Phone Number</label>
+            <div className="flex gap-2">
+              <select
+                id="countryCode"
+                value={formData.countryCode}
+                onChange={handleChange}
+                disabled={isDownloading}
+                className="w-[90px] px-2 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-700 bg-white"
+              >
+                <option value="">Code</option>
+                <option value="+91">+91 (India)</option>
+                <option value="+60">+60 (Malaysia)</option>
+                <option value="+1">+1 (USA)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+61">+61 (Australia)</option>
+              </select>
+              <input
+                type="text"
+                id="mobile"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                placeholder="1234567890"
+                value={formData.mobile}
+                onChange={handleChange}
+                disabled={isDownloading}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="nationality" className="block text-gray-700 text-sm font-medium mb-1">Nationality</label>
+            <input
+              type="text"
+              id="nationality"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Your Nationality"
+              value={formData.nationality}
+              onChange={handleChange}
+              disabled={isDownloading}
+            />
+          </div>
         </div>
 
         <button
           onClick={handleDownload}
-          className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center"
+          className="w-full bg-red-600 text-white py-3 rounded-md font-semibold hover:bg-red-700 transition-colors flex items-center justify-center"
           disabled={isDownloading}
         >
           {isDownloading ? (

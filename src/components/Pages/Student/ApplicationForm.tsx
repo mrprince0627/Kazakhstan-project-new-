@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { 
   User, 
   Mail, 
@@ -21,16 +21,8 @@ import { mockUniversities } from './mockData';
 import { University, Course, Student } from './index';
 import ChatWidget from './ChatWidget';
 
-interface ApplicationData {
-  studentData: Partial<Student>;
-  selectedUniversity: University | null;
-  selectedCourse: Course | null;
-  documents: {[key: string]: File | null};
-  submittedDate: string;
-}
-
 interface ApplicationFormProps {
-  onApplicationSubmit: (applicationData: ApplicationData) => void;
+  onApplicationSubmit: (applicationData: any) => void;
 }
 
 const ApplicationForm: React.FC<ApplicationFormProps> = ({ onApplicationSubmit }) => {
@@ -103,11 +95,11 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({ onApplicationSubmit }
 
   const countries = [...new Set(mockUniversities.map(uni => uni.country))];
 
-  const handleInputChange = (section: keyof Student, field: string, value: string) => {
+  const handleInputChange = (section: keyof Student, field: string, value: any) => {
     setStudentData(prev => ({
       ...prev,
       [section]: {
-        ...((prev[section] as object) || {}),
+        ...prev[section],
         [field]: value
       }
     }));
@@ -156,7 +148,10 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({ onApplicationSubmit }
     };
     onApplicationSubmit(applicationData);
   };
-
+ useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+  
   const renderPersonalInfo = () => (
     <div className="space-y-6">
       <h3 className="text-xl font-bold text-gray-900 mb-6">Personal Information</h3>
@@ -757,7 +752,7 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({ onApplicationSubmit }
     <div className="max-w-4xl mx-auto p-6">
       {/* Progress Bar */}
       <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-center sm:justify-between mb-4 flex-wrap">
           {steps.map((step, index) => {
             const IconComponent = step.icon;
             const isActive = currentStep === step.id;
@@ -765,7 +760,7 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({ onApplicationSubmit }
             
             return (
               <div key={step.id} className="flex items-center">
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
+                <div className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 ${
                   isCompleted 
                     ? 'bg-green-500 border-green-500 text-white' 
                     : isActive 
@@ -773,15 +768,15 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({ onApplicationSubmit }
                       : 'bg-white border-gray-300 text-gray-400'
                 }`}>
                   {isCompleted ? (
-                    <CheckCircle className="w-5 h-5" />
+                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                   ) : (
-                    <IconComponent className="w-5 h-5" />
+                    <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
                   )}
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`w-16 h-0.5 mx-2 ${
+                  <div className={`flex-1 h-0.5 mx-1 sm:mx-2 ${
                     isCompleted ? 'bg-green-500' : 'bg-gray-300'
-                  }`} />
+                  } w-8 sm:w-12 md:w-16`} />
                 )}
               </div>
             );

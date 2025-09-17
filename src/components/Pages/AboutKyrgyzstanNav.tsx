@@ -1,7 +1,12 @@
 
 import { Users, GraduationCap, Globe, Award, Handshake as Target, CheckCircle, Building, Phone, Mail, MapPin, Star, TrendingUp, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const AboutUs = () => {
+  useEffect(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }, []);
   const services = [
     {
       icon: <GraduationCap className="w-8 h-8 text-blue-600" />,
@@ -57,12 +62,14 @@ const AboutUs = () => {
               with world-class medical universities, making quality medical education accessible and affordable.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+              <Link to="/universities" 
+              className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                 Explore Universities
-              </button>
-              <button className="border-2 border-red-600 text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-colors">
+              </Link>
+              <Link to="/our-partners" 
+              className="border-2 border-red-600 text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-colors">
                 Become a Partner
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -164,7 +171,7 @@ const AboutUs = () => {
       </section>
 
       {/* Channel Partners */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-600 to-red-600">
         <div className="max-w-7xl mx-auto">
           <div className="text-center text-white mb-16">
             <h2 className="text-4xl font-bold mb-4">Our Channel Partners</h2>
@@ -231,7 +238,7 @@ const AboutUs = () => {
                 ></textarea>
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                  className="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
                 >
                   Apply for Partnership
                 </button>
@@ -315,7 +322,7 @@ const AboutUs = () => {
       </section>
 
       {/* Footer CTA */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-600 to-red-600">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             Start Your Medical Journey Today
@@ -324,10 +331,11 @@ const AboutUs = () => {
             Join thousands of successful doctors who started their journey with us
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            <Link  to="/student/application-form"
+            className="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Apply Now
-            </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+            </Link>
+            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors">
               Download Brochure
             </button>
           </div>

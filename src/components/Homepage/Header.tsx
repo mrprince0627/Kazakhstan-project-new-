@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, ChevronDown, Globe, GraduationCap, Phone, Mail } from 'lucide-react';
+import { Menu, X, ChevronDown, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface MenuItem {
@@ -13,34 +13,18 @@ const Header = () => {
 
   const resourcesMenu: MenuItem[] = [
     { name: 'About Us', path: '/about-us' },
-   { name: 'Contact Us', path: '/contact-us' },
+    { name: 'Contact Us', path: '/contact-us' },
     { name: 'View Our Partners', path: '/our-partners' },
-    {name:"Blog & News",path:"/blog-news"}
+    { name: 'Blog & News', path: '/blog-news' },
   ];
+
+  const handleNavClick = () => {
+    setIsMenuOpen(false);
+    setActiveDropdown(null);
+  };
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
-      {/* Top Bar */}
-      <div className="bg-red-600 text-white py-2">
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Phone className="w-4 h-4" />
-              <span>+91-11-2634-2643</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="w-4 h-4" />
-              <span>info@studyinkyrgyzstan.com</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Globe className="w-4 h-4" />
-            <span>Embassy of Kyrgyz Republic, New Delhi</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header */}
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -50,7 +34,6 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-800">Study in Kyrgyzstan</h1>
-              {/* <p className="text-sm text-gray-600">Your Gateway to Quality Education</p> */}
             </div>
           </div>
 
@@ -59,7 +42,6 @@ const Header = () => {
             <Link to="/" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               Home
             </Link>
-
             <Link to="/universities" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               Universities
             </Link>
@@ -88,7 +70,7 @@ const Header = () => {
               </button>
 
               {activeDropdown === 'resources' && (
-                <div className="absolute top-full left-0 w-60 bg-white shadow-xl rounded-lg mt-2 p-4 border">
+                <div className="absolute top-full left-0 w-60 bg-white shadow-xl rounded-lg mt-0 p-4 border">
                   <ul className="space-y-2">
                     {resourcesMenu.map((item, index) => (
                       <li key={index}>
@@ -126,22 +108,22 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t">
             <nav className="space-y-4">
-              <Link to="/home" className="block text-gray-700 hover:text-red-600 font-medium">
+              <Link to="/" onClick={handleNavClick} className="block text-gray-700 hover:text-red-600 font-medium">
                 Home
               </Link>
-              <Link to="/universities" className="block text-gray-700 hover:text-red-600 font-medium">
+              <Link to="/universities" onClick={handleNavClick} className="block text-gray-700 hover:text-red-600 font-medium">
                 Universities
               </Link>
-              <Link to="/about-kyrgyzstan" className="block text-gray-700 hover:text-red-600 font-medium">
+              <Link to="/about-kyrgyzstan" onClick={handleNavClick} className="block text-gray-700 hover:text-red-600 font-medium">
                 About Kyrgyzstan
               </Link>
-              <Link to="/compare" className="block text-gray-700 hover:text-red-600 font-medium">
+              <Link to="/compare" onClick={handleNavClick} className="block text-gray-700 hover:text-red-600 font-medium">
                 Compare Universities
               </Link>
-              <Link to="/scholarships" className="block text-gray-700 hover:text-red-600 font-medium">
+              <Link to="/scholarships" onClick={handleNavClick} className="block text-gray-700 hover:text-red-600 font-medium">
                 Scholarships
               </Link>
-              <Link to="/education-system" className="block text-gray-700 hover:text-red-600 font-medium">
+              <Link to="/education-system" onClick={handleNavClick} className="block text-gray-700 hover:text-red-600 font-medium">
                 Education System
               </Link>
 
@@ -162,6 +144,7 @@ const Header = () => {
                       <Link
                         key={index}
                         to={item.path}
+                        onClick={handleNavClick}
                         className="block text-gray-600 hover:text-red-600 text-sm transition-colors"
                       >
                         {item.name}
@@ -172,10 +155,11 @@ const Header = () => {
               </div>
 
               <Link
-                to="/contact"
+                to="/auth"
+                onClick={handleNavClick}
                 className="block bg-red-600 text-white px-4 py-2 rounded-lg text-center"
               >
-                Contact Us
+                Sign Up
               </Link>
             </nav>
           </div>

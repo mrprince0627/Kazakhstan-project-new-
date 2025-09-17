@@ -1,4 +1,4 @@
-import  { useState} from 'react';
+import  { useState , useEffect} from 'react';
 import { 
   MapPin, 
 
@@ -49,6 +49,7 @@ interface University {
   recognition: string[];
   tuitionFee: string;
   featured: boolean;
+  status: 'Private' | 'Government';
 }
 
 const universities: University[] = [
@@ -75,7 +76,8 @@ const universities: University[] = [
     students: "5,000+",
     recognition: ["WHO", "MCI", "WFME"],
     tuitionFee: "$3,500/year",
-    featured: true
+    featured: true,
+    status: "Private"
   },
   {
     id: 2,
@@ -100,7 +102,8 @@ const universities: University[] = [
     students: "3,200+",
     recognition: ["WHO", "MCI"],
     tuitionFee: "$3,200/year",
-    featured: true
+    featured: true,
+    status: "Private"
   },
   {
     id: 3,
@@ -125,7 +128,8 @@ const universities: University[] = [
     students: "8,500+",
     recognition: ["WHO", "MCI", "UNESCO"],
     tuitionFee: "$2,800/year",
-    featured: false
+    featured: false,
+    status: "Government"
   },
   {
     id: 4,
@@ -150,7 +154,8 @@ const universities: University[] = [
     students: "4,100+",
     recognition: ["WHO", "MCI"],
     tuitionFee: "$3,800/year",
-    featured: true
+    featured: true,
+    status: "Private"
   },
   {
     id: 5,
@@ -175,7 +180,8 @@ const universities: University[] = [
     students: "6,800+",
     recognition: ["WHO", "MCI", "WFME", "ECFMG"],
     tuitionFee: "$3,000/year",
-    featured: true
+    featured: true,
+    status: "Government"
   },
   {
     id: 6,
@@ -200,14 +206,15 @@ const universities: University[] = [
     students: "4,500+",
     recognition: ["WHO", "MCI"],
     tuitionFee: "$2,900/year",
-    featured: false
+    featured: false,
+    status: "Government"
   }
 ];
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState('All');
-  const [selectedType, setSelectedType] = useState('All');
+  const [selectedCity, setSelectedCity] = useState('City');
+  const [selectedStatus, setSelectedStatus] = useState('All');
   const [sortBy, setSortBy] = useState('featured');
   const [favorites, setFavorites] = useState<number[]>([]);
   // const [showFilters, setShowFilters] = useState(false);
@@ -215,17 +222,16 @@ function App() {
   const [showDownloadPopup, setShowDownloadPopup] = useState(false);
   const [selectedUniversityForDownload, setSelectedUniversityForDownload] = useState<University | null>(null);
 
-  const countries = ['All', ...Array.from(new Set(universities.map(u => u.country)))];
-  const scholarshipTypes = ['All', 'Merit', 'Need-based', 'Sports', 'Early Bird'];
+  const cities = ['City', ...Array.from(new Set(universities.map(u => u.location)))];
+  const universityStatuses = ['All', 'Private', 'Government'];
 
   const filteredUniversities = universities
     .filter(uni => {
       const matchesSearch = uni.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            uni.location.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCountry = selectedCountry === 'All' || uni.country === selectedCountry;
-      const matchesType = selectedType === 'All' || 
-                         uni.scholarships.some(s => s.type === selectedType);
-      return matchesSearch && matchesCountry && matchesType;
+      const matchesCity = selectedCity === 'City' || uni.location === selectedCity;
+      const matchesStatus = selectedStatus === 'All' || uni.status === selectedStatus;
+      return matchesSearch && matchesCity && matchesStatus;
     })
     .sort((a, b) => {
       switch (sortBy) {
@@ -281,40 +287,14 @@ function slugify(str: string): string {
     .replace(/\s+/g, "-")      // spaces → hyphens
     .replace(/[^\w-]+/g, "");  // remove special chars
 }
-
+ useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+  
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <GraduationCap className="w-8 h-8 text-blue-600" />
-              <h1 className="text-xl font-bold text-gray-900">MBBS Scholarships Hub</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <button className="text-gray-600 hover:text-blue-600 transition-colors">
-                <Heart className="w-5 h-5" />
-              </button>
-              {compareList.length > 0 && (
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-600">Compare ({compareList.length})</span>
-                  <button 
-                    onClick={clearCompare}
-                    className="text-xs text-blue-600 hover:text-blue-800 underline"
-                  >
-                    Clear
-                  </button>
-                </div>
-              )}
-              <button className="text-gray-600 hover:text-blue-600 transition-colors">
-                <Share2 className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-red-600 via-red-700 to-red-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -364,23 +344,23 @@ function slugify(str: string): string {
             {/* Filters */}
             <div className="flex flex-wrap gap-4">
               <select
-                value={selectedCountry}
-                onChange={(e) => setSelectedCountry(e.target.value)}
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
                 className="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                {countries.map(country => (
-                  <option key={country} value={country}>{country}</option>
+                {cities.map(city => (
+                  <option key={city} value={city}>{city}</option>
                 ))}
               </select>
 
               <select
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
                 className="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                {scholarshipTypes.map(type => (
-                  <option key={type} value={type}>{type} Scholarship</option>
-                ))}
+                {universityStatuses.map(status => (
+                  <option key={status} value={status}> {status}</option>
+                ))} 
               </select>
 
               <select
@@ -583,24 +563,7 @@ function slugify(str: string): string {
         </div>
       )}
       {/* Footer CTA */}
-      <div className="bg-gradient-to-r from-red-600 via-red-600 to-red-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Start Your Medical Journey?</h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Get personalized guidance and support throughout your application process
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-red-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-colors">
-                Get Free Consultation
-              </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-red-600 transition-colors">
-                Download Brochure
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+     
 
 < WhyChooseKyrgyzstan/>
 <ApplicationProcess/>

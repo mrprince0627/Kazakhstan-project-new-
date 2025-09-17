@@ -10,10 +10,17 @@ import ApplicationForm from "../university/ApplicationForm";
 import ApplicationProcedure from "../university/ApplicationProcedure";
 import FAQ from "../university/FAQ";
 import TrustSeals from "../university/TrustSeals";
+import { useEffect } from "react";
+
 
 
 
 const UniversityDetail: React.FC = () => {
+  
+  useEffect(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }, []);
+
   return (
     <>
       <UniversityHero />

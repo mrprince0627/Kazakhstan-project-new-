@@ -1,7 +1,14 @@
 
 import { ArrowRight, MapPin, Users, Award } from 'lucide-react';
+import { Link } from 'react-router-dom';
+ import DownloadFormPopup from '../university/DownloadFormPopup';
+import { useState } from 'react';
+
 
 const Hero = () => {
+  
+ const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   return (
     <section id="home" className="bg-gradient-to-br from-red-600 via-red-700 to-red-700 text-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,11 +56,14 @@ const Hero = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-all duration-200 transform hover:scale-105">
+              <Link  to="/student/application-form"
+              className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-all duration-200 transform hover:scale-105">
                 <span>Apply Now</span>
                 <ArrowRight className="h-5 w-5" />
-              </button>
-              <button className="border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-400 hover:text-blue-900 transition-all duration-200">
+              </Link>
+              <button  onClick={() => setIsPopupOpen(true)}
+
+               className="border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-400 hover:text-blue-900 transition-all duration-200">
                 Download Brochure
               </button>
             </div>
@@ -88,7 +98,14 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      
+<DownloadFormPopup 
+        isOpen={isPopupOpen} 
+        onClose={() => setIsPopupOpen(false)} 
+        universityName="Kyrgyzstan Universities" 
+      />
     </section>
+    
   );
 };
 

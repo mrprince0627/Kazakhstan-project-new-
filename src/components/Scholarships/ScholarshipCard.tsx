@@ -3,6 +3,7 @@ import { Calendar, Users, Award, ExternalLink, MapPin, GraduationCap, CheckSquar
 import { Scholarship, University } from './types/scholarship';
 import { useNavigate } from 'react-router-dom';
 
+
 interface ScholarshipCardProps {
   university: University;
   scholarship: Scholarship;
@@ -167,7 +168,7 @@ export const ScholarshipCard: React.FC<ScholarshipCardProps> = ({
 
         {/* CTA Button */}
         <button
-          onClick={() => onViewDetails(university.id, scholarship.id)}
+          onClick={() => navigate(`/scholarships/${university.id}/${scholarship.id}`)}
           className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center justify-center group-hover:shadow-lg"
         >
           View Full Details

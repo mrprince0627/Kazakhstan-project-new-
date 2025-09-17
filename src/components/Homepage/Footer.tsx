@@ -130,37 +130,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Embassy Information */}
-        <div className="mt-12 pt-8 border-t border-gray-800">
-          <div className="bg-gray-800 rounded-2xl p-6">
-            <div className="grid md:grid-cols-2 gap-6 items-center">
-              <div>
-                <h4 className="text-lg font-semibold mb-3 text-red-400">Embassy of Kyrgyz Republic</h4>
-                <p className="text-gray-400 text-sm mb-3">
-                  EP-34, Dr. APJ Abdul Kalam Road, New Delhi - 110011
-                </p>
-                <div className="flex items-center space-x-4 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <Phone className="w-4 h-4 text-red-400" />
-                    <span className="text-gray-400">+91-11-2634-2644</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Globe className="w-4 h-4 text-red-400" />
-                    <a href="http://www.kyrgyzembassy.in" target="_blank" rel="noopener noreferrer" 
-                       className="text-red-400 hover:text-red-300 transition-colors">
-                      Official Website
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="text-right">
-                <button className="bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">
-                  Contact Embassy
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+       
 
         {/* Social Media & Newsletter */}
         <div className="mt-12 pt-8 border-t border-gray-800">

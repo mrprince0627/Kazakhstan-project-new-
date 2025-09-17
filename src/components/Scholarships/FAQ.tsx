@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { faqs } from './data/scholarships';
+import { Link } from 'react-router-dom';
 
 export const FAQ: React.FC = () => {
   const [openItems, setOpenItems] = useState<number[]>([]);
@@ -49,9 +50,10 @@ export const FAQ: React.FC = () => {
         <p className="text-yellow-800 mb-4">
           Can't find the answer you're looking for? Contact our educational counselors for personalized guidance.
         </p>
-        <button className="bg-yellow-600 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 transition-colors font-semibold">
+        <Link to="/contact-us"
+        className="bg-yellow-600 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 transition-colors font-semibold">
           Contact Counselor
-        </button>
+        </Link>
       </div>
     </div>
   );
