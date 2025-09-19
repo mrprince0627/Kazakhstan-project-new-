@@ -10,6 +10,8 @@ import ApplicationForm from "../university/ApplicationForm";
 import ApplicationProcedure from "../university/ApplicationProcedure";
 import FAQ from "../university/FAQ";
 import TrustSeals from "../university/TrustSeals";
+import UniversitySch from "./UniversityScholarships/UniversitySch"
+import CoursesMain from "./UniversityCourses/CoursesMain"
 import { useEffect } from "react";
 
 
@@ -26,9 +28,11 @@ const UniversityDetail: React.FC = () => {
       <UniversityHero />
       <About />
       <Facilities />
+      <CoursesMain/>
       <CampusPhotos />
       <Rankings />
       <InternationalStudents />
+      < UniversitySch/>
       <ParentTestimonials />
       <RatingsReviews />
       <ApplicationForm />

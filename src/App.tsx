@@ -25,6 +25,7 @@ import StudentDashboard from './components/Pages/Student/Dashboard';
 import AgentDashboard from './components/Pages/Agent/AgentDashboard';
 import BlognewsMain from './components/Pages/Blog&News/BlogNewsMain';
 import ApplicationForm from './components/Pages/Student/ApplicationForm';
+import { MBBSCoursePage } from './components/university/UniversityCourses/MBBSCoursePage';
 
 
 
@@ -75,8 +76,10 @@ function App(): JSX.Element {
             }} />
           }
         />
+         <Route path='/universities/:slug/mbbscourses' element={<MBBSCoursePage />} />
 
       </Routes>
+
 
       <Footer />
     </div>
